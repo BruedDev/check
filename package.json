@@ -1,0 +1,20 @@
+{
+  "name": "web_ban_hang",
+  "version": "1.0.0",
+  "main": "admin.js",
+  "scripts": {
+    "start": "concurrently \"sass --watch style.scss:style.css responsive.scss:responsive.css\" \"json-server --watch database.json\"",
+    "watch-css": "sass --watch style.scss:style.css responsive.scss:responsive.css",
+     "start-server": "json-server --watch database.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
