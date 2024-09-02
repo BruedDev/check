@@ -471,12 +471,12 @@ backgroundProduct();
 document.addEventListener('DOMContentLoaded', () => {
   const inputSearch = document.querySelector('.input_search');
   const resultSearch = document.querySelector('.result_search');
-  const icon = document.querySelector('.icon');
+  const iconSearchA = document.querySelector('.search_icon_a');
+  const iconX = document.querySelector('.iconz');
 
   // Hàm lấy danh sách sản phẩm từ các section
   function getProducts() {
     const products = [];
-    // Lấy sản phẩm từ section season_sale
     const seasonSaleProducts = document.querySelectorAll('#season_sale .background_product');
     seasonSaleProducts.forEach(product => {
       const name = product.querySelector('.name_product .name').textContent.trim();
@@ -486,7 +486,6 @@ document.addEventListener('DOMContentLoaded', () => {
       products.push({ name, image, price, dell, element: product });
     });
 
-    // Lấy sản phẩm từ section top-trending
     const topTrendingProducts = document.querySelectorAll('.top-trending .background_product');
     topTrendingProducts.forEach(product => {
       const name = product.querySelector('.name_product .name').textContent.trim();
@@ -503,9 +502,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateSearchResults(query) {
     resultSearch.innerHTML = '';
 
-    // Kiểm tra xem có nội dung tìm kiếm hay không
     if (query.trim() === '') {
       resultSearch.style.display = 'none';
+      iconSearchA.style.display = 'block';
+      iconX.style.display = 'none';
       return;
     }
 
@@ -513,10 +513,8 @@ document.addEventListener('DOMContentLoaded', () => {
       product.name.toLowerCase().includes(query.toLowerCase())
     );
 
-    // Lưu kết quả vào localStorage
     localStorage.setItem('searchResults', JSON.stringify(filteredProducts));
 
-    // Hiển thị kết quả
     filteredProducts.forEach(product => {
       const resultItem = document.createElement('div');
       resultItem.classList.add('result_item');
@@ -531,26 +529,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
 
-      // Thêm sự kiện click để chuyển đến sản phẩm
       resultItem.addEventListener('click', () => {
-        // Lưu dữ liệu sản phẩm vào localStorage
         localStorage.setItem('productName', product.name);
         localStorage.setItem('productImage', product.image);
 
-        // Lưu thêm thông tin sản phẩm từ phần tử gốc
         const backgroundA = product.element;
         const productId = backgroundA.querySelector('.id') ? backgroundA.querySelector('.id').innerText.trim() : 'Unknown';
         const productSale = backgroundA.querySelector('.sale') ? backgroundA.querySelector('.sale').innerText.trim() : 'Unknown';
         const productPrice = backgroundA.querySelector('.price') ? parseFloat(backgroundA.querySelector('.price').innerText.replace(/\D/g, "")) : 0;
         const productDell = backgroundA.querySelector('.dell') ? backgroundA.querySelector('.dell').innerText : 'Unknown';
 
-        // Lưu dữ liệu sản phẩm vào localStorage
         localStorage.setItem('productId', productId);
         localStorage.setItem('productPrice', productPrice);
         localStorage.setItem('productDell', productDell);
         localStorage.setItem('productSale', productSale);
 
-        // Lọc và lưu ảnh và màu sắc vào localStorage
         const imageSources = new Set();
         const colorSources = new Set();
         const colorSrcSources = new Set();
@@ -604,20 +597,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     resultSearch.style.display = 'block';
+    iconSearchA.style.display = 'none';
+    iconX.style.display = 'block';
   }
 
-  // Xử lý sự kiện nhập liệu
   inputSearch.addEventListener('input', (event) => {
     const query = event.target.value;
     updateSearchResults(query);
   });
 
-  // Xử lý sự kiện nhấp vào icon để xóa nội dung tìm kiếm
-  icon.addEventListener('click', () => {
-    inputSearch.value = '';  // Xóa nội dung ô nhập
-    updateSearchResults('');  // Cập nhật kết quả tìm kiếm
+  iconX.addEventListener('click', () => {
+    inputSearch.value = '';
+    updateSearchResults('');
+    iconSearchA.style.display = 'block';
+    iconX.style.display = 'none';
   });
 });
+
 
 
 

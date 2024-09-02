@@ -209,9 +209,6 @@ const animateProductToCart = (product) => {
 };
 
 addToCart();
-
-
-
 // End hàm bắt sự kiện khi nhấn add_to_cart
 
 // hàm đưa vào giỏ hàng
