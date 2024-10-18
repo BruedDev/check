@@ -329,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
         productName,
         productId,
         productPrice,
-        productDell, // Thêm giá gốc vào sản phẩm
+        productDell,
         productImage,
         acTiveColor: activeColor,
         quantity: 1,
@@ -339,7 +339,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     localStorage.setItem('ContainerCart', JSON.stringify(ContainerCart));
     updateCartCount();
-    // updateCartUI();
   });
 });
 

@@ -63,7 +63,7 @@ const getProductQuantity = (productId) => {
   return productQuantities[productId] || 0;
 };
 
-// hàm bắt sự kiện khi nhấn add_to_cart
+// Hàm bắt sự kiện khi nhấn add_to_cart
 const addToCart = () => {
   const buttonAdd = document.querySelectorAll('.add_to_cart');
   buttonAdd.forEach((item) => {
@@ -94,7 +94,7 @@ const addToCart = () => {
 
         // Kiểm tra số lượng sản phẩm
         if (currentQuantity >= 5) {
-          showNotification('error', 'Bạn chỉ có thể thêm tối đa 5 sản phẩm cùng loại vào giỏ hàng!');
+          alert('Bạn chỉ có thể thêm tối đa 5 sản phẩm cùng loại vào giỏ hàng!');
           return;
         }
 
@@ -124,56 +124,15 @@ const addToCart = () => {
         }
         localStorage.setItem('ContainerCart', JSON.stringify(ContainerCart));
 
-        // Hiển thị thông báo thành công và sau đó thực hiện animation và cập nhật số lượng
-        showNotification('success', 'Sản phẩm đã được thêm vào giỏ hàng!', productImage, () => {
-          animateProductToCart(product);
-          updateCartCount();
-          goToCart();
-        });
+        // Thực hiện animation và cập nhật số lượng
+        animateProductToCart(product);
+        updateCartCount();
+        goToCart();
       }
     });
   });
 
   document.addEventListener('DOMContentLoaded', updateCartCount);
-};
-
-// Hàm hiển thị thông báo
-const showNotification = (type, message, image = '', callback) => {
-  const overlay = document.querySelector('.overlay_success');
-  const overlay_error = document.querySelector('.overlay_error');
-  const textSuccess = overlay.querySelector('.text_sucess');
-  const imgSuccess = overlay.querySelector('.img_success');
-  const successRing = overlay.querySelector('#js-success-ring');
-  const successTick = overlay.querySelector('#js-success-tick');
-
-  textSuccess.textContent = message;
-  imgSuccess.src = image;
-
-  if (type === 'success') {
-    successRing.classList.add('--ring-complete');
-    successTick.classList.add('--tick-complete');
-  } else {
-    successRing.classList.add('--ring-error');
-    successTick.style.display = 'none';
-  }
-
-  overlay.style.display = 'block';
-  overlay.style.opacity = '1';
-
-  setTimeout(() => {
-    overlay.style.opacity = '0';
-    setTimeout(() => {
-      overlay.style.display = 'none';
-      successRing.classList.remove('--ring-complete', '--ring-error');
-      successTick.classList.remove('--tick-complete');
-      successTick.style.display = '';
-
-      // Chỉ thực hiện callback nếu là thông báo thành công
-      if (type === 'success' && typeof callback === 'function') {
-        callback();
-      }
-    }, 300);
-  }, 2000);
 };
 
 // Hàm animation sản phẩm vào giỏ hàng
@@ -209,7 +168,7 @@ const animateProductToCart = (product) => {
 };
 
 addToCart();
-// End hàm bắt sự kiện khi nhấn add_to_cart
+
 
 // hàm đưa vào giỏ hàng
 const goToCart = () => {
