@@ -13,7 +13,7 @@ Bachelor's Degree in [Your Major]
 
 ## Technical Skills
 - **Frontend Development:** React.js, JavaScript (ES6+)
-- **UI Development:** HTML5, CSS3, SCSS, Tailwind CSS, Ant Design
+- **UI Development:** HTML5, CSS3, SCSS, Tailwind CSS, Ant Design, Boostrap, swiper
 - **State Management:** Redux
 - **Specialization:** Real-time web applications
 - **Version Control:** Git
@@ -39,4 +39,4 @@ A final-year student at DTU with strong foundation in frontend development. Spec
 
 ## Languages
 - Vietnamese (Native)
-- English (Professional)
+- English
